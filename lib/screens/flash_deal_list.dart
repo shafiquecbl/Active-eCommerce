@@ -167,8 +167,12 @@ class _FlashDealListState extends State<FlashDealList> {
           return GestureDetector(
             onTap: () {
               if (time == null) {
-                ToastComponent.showDialog(AppLocalizations.of(context).flash_deal_list_screen_flash_deal_has_ended, context,
-                    gravity: Toast.CENTER, duration: Toast.LENGTH_LONG);
+                ToastComponent.showDialog(
+                    AppLocalizations.of(context)
+                        .flash_deal_list_screen_flash_deal_has_ended,
+                    context,
+                    gravity: Toast.CENTER,
+                    duration: Toast.LENGTH_LONG);
               } else {
                 Navigator.push(context, MaterialPageRoute(builder: (context) {
                   return FlashDealProducts(
@@ -197,6 +201,10 @@ class _FlashDealListState extends State<FlashDealList> {
                             image: AppConfig.BASE_PATH +
                                 flashDealResponse.flash_deals[index].banner,
                             fit: BoxFit.cover,
+                            imageErrorBuilder: (context, object, stackTrace) {
+                              return Image.network('$emptyImage',
+                                  fit: BoxFit.cover);
+                            },
                           ))),
                 ),
                 Padding(
@@ -215,7 +223,8 @@ class _FlashDealListState extends State<FlashDealList> {
                   child: Center(
                       child: time == null
                           ? Text(
-                        AppLocalizations.of(context).flash_deal_list_screen_ended,
+                              AppLocalizations.of(context)
+                                  .flash_deal_list_screen_ended,
                               style: TextStyle(
                                   color: MyTheme.accent_color,
                                   fontSize: 16.0,

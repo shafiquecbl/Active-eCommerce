@@ -308,6 +308,10 @@ class _SellerDetailsState extends State<SellerDetails> {
                             placeholder: 'assets/placeholder_rectangle.png',
                             image: AppConfig.BASE_PATH + i,
                             fit: BoxFit.fill,
+                            imageErrorBuilder: (context, object, stackTrace) {
+                              return Image.network('$emptyImage',
+                                  fit: BoxFit.cover);
+                            },
                           ))),
                   Align(
                     alignment: Alignment.bottomCenter,
@@ -596,6 +600,9 @@ class _SellerDetailsState extends State<SellerDetails> {
               placeholder: 'assets/placeholder.png',
               image: AppConfig.BASE_PATH + _shopDetails.logo,
               fit: BoxFit.cover,
+              imageErrorBuilder: (context, object, stackTrace) {
+                return Image.network('$emptyImage', fit: BoxFit.cover);
+              },
             )),
       ),
       Container(

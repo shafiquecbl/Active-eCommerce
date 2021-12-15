@@ -25,7 +25,6 @@ import 'package:active_ecommerce_flutter/helpers/shared_value_helper.dart';
 import 'package:active_ecommerce_flutter/repositories/profile_repository.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-
 class Login extends StatefulWidget {
   @override
   _LoginState createState() => _LoginState();
@@ -57,15 +56,18 @@ class _LoginState extends State<Login> {
     var password = _passwordController.text.toString();
 
     if (_login_by == 'email' && email == "") {
-      ToastComponent.showDialog(AppLocalizations.of(context).login_screen_email_warning, context,
+      ToastComponent.showDialog(
+          AppLocalizations.of(context).login_screen_email_warning, context,
           gravity: Toast.CENTER, duration: Toast.LENGTH_LONG);
       return;
     } else if (_login_by == 'phone' && _phone == "") {
-      ToastComponent.showDialog(AppLocalizations.of(context).login_screen_phone_warning, context,
+      ToastComponent.showDialog(
+          AppLocalizations.of(context).login_screen_phone_warning, context,
           gravity: Toast.CENTER, duration: Toast.LENGTH_LONG);
       return;
     } else if (password == "") {
-      ToastComponent.showDialog(AppLocalizations.of(context).login_screen_password_warning, context,
+      ToastComponent.showDialog(
+          AppLocalizations.of(context).login_screen_password_warning, context,
           gravity: Toast.CENTER, duration: Toast.LENGTH_LONG);
       return;
     }
@@ -133,7 +135,8 @@ class _LoginState extends State<Login> {
     final token = facebookLoginResult.accessToken.token;
 
     /// for profile details also use the below code
-    Uri url = Uri.parse('https://graph.facebook.com/v2.12/me?fields=name,first_name,last_name,email&access_token=$token');
+    Uri url = Uri.parse(
+        'https://graph.facebook.com/v2.12/me?fields=name,first_name,last_name,email&access_token=$token');
     final graphResponse = await http.get(url);
     final profile = json.decode(graphResponse.body);
     //print(profile);
@@ -226,16 +229,17 @@ class _LoginState extends State<Login> {
                   Padding(
                     padding: const EdgeInsets.only(top: 40.0, bottom: 15),
                     child: Container(
-                      width: 75,
+                      width: 175,
                       height: 75,
-                      child:
-                          Image.asset('assets/login_registration_form_logo.png'),
+                      child: Image.asset(
+                          'assets/login_registration_form_logo.png'),
                     ),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(bottom: 20.0),
                     child: Text(
-                      "${AppLocalizations.of(context).login_screen_login_to} " + AppConfig.app_name,
+                      "${AppLocalizations.of(context).login_screen_login_to} " +
+                          AppConfig.app_name,
                       style: TextStyle(
                           color: MyTheme.accent_color,
                           fontSize: 18,
@@ -250,7 +254,11 @@ class _LoginState extends State<Login> {
                         Padding(
                           padding: const EdgeInsets.only(bottom: 4.0),
                           child: Text(
-                            _login_by == "email" ? AppLocalizations.of(context).login_screen_email : AppLocalizations.of(context).login_screen_phone,
+                            _login_by == "email"
+                                ? AppLocalizations.of(context)
+                                    .login_screen_email
+                                : AppLocalizations.of(context)
+                                    .login_screen_phone,
                             style: TextStyle(
                                 color: MyTheme.accent_color,
                                 fontWeight: FontWeight.w600),
@@ -280,7 +288,8 @@ class _LoginState extends State<Login> {
                                           });
                                         },
                                         child: Text(
-                                            AppLocalizations.of(context).login_screen_or_login_with_phone,
+                                          AppLocalizations.of(context)
+                                              .login_screen_or_login_with_phone,
                                           style: TextStyle(
                                               color: MyTheme.accent_color,
                                               fontStyle: FontStyle.italic,
@@ -311,7 +320,8 @@ class _LoginState extends State<Login> {
                                       print(value);
                                     },
                                     selectorConfig: SelectorConfig(
-                                      selectorType: PhoneInputSelectorType.DIALOG,
+                                      selectorType:
+                                          PhoneInputSelectorType.DIALOG,
                                     ),
                                     ignoreBlank: false,
                                     autoValidateMode: AutovalidateMode.disabled,
@@ -322,8 +332,9 @@ class _LoginState extends State<Login> {
                                     initialValue: phoneCode,
                                     textFieldController: _phoneNumberController,
                                     formatInput: true,
-                                    keyboardType: TextInputType.numberWithOptions(
-                                        signed: true, decimal: true),
+                                    keyboardType:
+                                        TextInputType.numberWithOptions(
+                                            signed: true, decimal: true),
                                     inputDecoration: InputDecorations
                                         .buildInputDecoration_phone(
                                             hint_text: "01710 333 558"),
@@ -339,7 +350,8 @@ class _LoginState extends State<Login> {
                                     });
                                   },
                                   child: Text(
-                                    AppLocalizations.of(context).login_screen_or_login_with_email,
+                                    AppLocalizations.of(context)
+                                        .login_screen_or_login_with_email,
                                     style: TextStyle(
                                         color: MyTheme.accent_color,
                                         fontStyle: FontStyle.italic,
@@ -384,7 +396,8 @@ class _LoginState extends State<Login> {
                                   }));
                                 },
                                 child: Text(
-                                    AppLocalizations.of(context).login_screen_forgot_password,
+                                  AppLocalizations.of(context)
+                                      .login_screen_forgot_password,
                                   style: TextStyle(
                                       color: MyTheme.accent_color,
                                       fontStyle: FontStyle.italic,
@@ -411,7 +424,8 @@ class _LoginState extends State<Login> {
                                   borderRadius: const BorderRadius.all(
                                       Radius.circular(12.0))),
                               child: Text(
-                                AppLocalizations.of(context).login_screen_log_in,
+                                AppLocalizations.of(context)
+                                    .login_screen_log_in,
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 14,
@@ -427,7 +441,8 @@ class _LoginState extends State<Login> {
                           padding: const EdgeInsets.only(top: 20.0),
                           child: Center(
                               child: Text(
-                                AppLocalizations.of(context).login_screen_or_create_new_account,
+                            AppLocalizations.of(context)
+                                .login_screen_or_create_new_account,
                             style: TextStyle(
                                 color: MyTheme.medium_grey, fontSize: 12),
                           )),
@@ -449,7 +464,8 @@ class _LoginState extends State<Login> {
                                   borderRadius: const BorderRadius.all(
                                       Radius.circular(12.0))),
                               child: Text(
-                                AppLocalizations.of(context).login_screen_sign_up,
+                                AppLocalizations.of(context)
+                                    .login_screen_sign_up,
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 14,
@@ -471,7 +487,8 @@ class _LoginState extends State<Login> {
                             padding: const EdgeInsets.only(top: 20.0),
                             child: Center(
                                 child: Text(
-                                  AppLocalizations.of(context).login_screen_login_with,
+                              AppLocalizations.of(context)
+                                  .login_screen_login_with,
                               style: TextStyle(
                                   color: MyTheme.medium_grey, fontSize: 14),
                             )),
@@ -483,7 +500,8 @@ class _LoginState extends State<Login> {
                             child: Container(
                               width: 120,
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Visibility(
                                     visible: SocialConfig.allow_google_login,
@@ -493,8 +511,8 @@ class _LoginState extends State<Login> {
                                       },
                                       child: Container(
                                         width: 28,
-                                        child:
-                                            Image.asset("assets/google_logo.png"),
+                                        child: Image.asset(
+                                            "assets/google_logo.png"),
                                       ),
                                     ),
                                   ),

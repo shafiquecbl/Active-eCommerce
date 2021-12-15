@@ -11,7 +11,14 @@ class ListProductCard extends StatefulWidget {
   String stroked_price;
   bool has_discount;
 
-  ListProductCard({Key key, this.id, this.image, this.name, this.main_price,this.stroked_price,this.has_discount})
+  ListProductCard(
+      {Key key,
+      this.id,
+      this.image,
+      this.name,
+      this.main_price,
+      this.stroked_price,
+      this.has_discount})
       : super(key: key);
 
   @override
@@ -47,6 +54,9 @@ class _ListProductCardState extends State<ListProductCard> {
                     placeholder: 'assets/placeholder.png',
                     image: AppConfig.BASE_PATH + widget.image,
                     fit: BoxFit.cover,
+                    imageErrorBuilder: (context, object, stackTrace) {
+                      return Image.network('$emptyImage', fit: BoxFit.cover);
+                    },
                   ))),
           Container(
             width: 240,
@@ -79,20 +89,22 @@ class _ListProductCardState extends State<ListProductCard> {
                         fontWeight: FontWeight.w600),
                   ),
                 ),
-                widget.has_discount?Padding(
-                  padding: EdgeInsets.fromLTRB(8, 0, 8, 0),
-                  child: Text(
-                    widget.stroked_price,
-                    textAlign: TextAlign.left,
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 1,
-                    style: TextStyle(
-                        decoration:TextDecoration.lineThrough,
-                        color: MyTheme.medium_grey,
-                        fontSize: 12,
-                        fontWeight: FontWeight.w600),
-                  ),
-                ):Container(),
+                widget.has_discount
+                    ? Padding(
+                        padding: EdgeInsets.fromLTRB(8, 0, 8, 0),
+                        child: Text(
+                          widget.stroked_price,
+                          textAlign: TextAlign.left,
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 1,
+                          style: TextStyle(
+                              decoration: TextDecoration.lineThrough,
+                              color: MyTheme.medium_grey,
+                              fontSize: 12,
+                              fontWeight: FontWeight.w600),
+                        ),
+                      )
+                    : Container(),
               ],
             ),
           ),

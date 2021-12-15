@@ -23,7 +23,6 @@ import 'package:active_ecommerce_flutter/screens/offline_screen.dart';
 import 'package:active_ecommerce_flutter/screens/paytm_screen.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-
 class Checkout extends StatefulWidget {
   int order_id; // only need when making manual payment from order details
   bool
@@ -154,8 +153,11 @@ class _CheckoutState extends State<Checkout> {
   onCouponApply() async {
     var coupon_code = _couponController.text.toString();
     if (coupon_code == "") {
-      ToastComponent.showDialog(AppLocalizations.of(context).checkout_screen_coupon_code_warning, context,
-          gravity: Toast.CENTER, duration: Toast.LENGTH_LONG);
+      ToastComponent.showDialog(
+          AppLocalizations.of(context).checkout_screen_coupon_code_warning,
+          context,
+          gravity: Toast.CENTER,
+          duration: Toast.LENGTH_LONG);
       return;
     }
 
@@ -187,14 +189,16 @@ class _CheckoutState extends State<Checkout> {
 
   onPressPlaceOrderOrProceed() {
     if (_selected_payment_method == "") {
-      ToastComponent.showDialog(AppLocalizations.of(context).common_payment_choice_warning, context,
+      ToastComponent.showDialog(
+          AppLocalizations.of(context).common_payment_choice_warning, context,
           gravity: Toast.CENTER, duration: Toast.LENGTH_LONG);
       return;
     }
 
     if (_selected_payment_method == "stripe_payment") {
       if (_grandTotalValue == 0.00) {
-        ToastComponent.showDialog(AppLocalizations.of(context).common_nothing_to_pay, context,
+        ToastComponent.showDialog(
+            AppLocalizations.of(context).common_nothing_to_pay, context,
             gravity: Toast.CENTER, duration: Toast.LENGTH_LONG);
         return;
       }
@@ -210,7 +214,8 @@ class _CheckoutState extends State<Checkout> {
       });
     } else if (_selected_payment_method == "paypal_payment") {
       if (_grandTotalValue == 0.00) {
-        ToastComponent.showDialog(AppLocalizations.of(context).common_nothing_to_pay, context,
+        ToastComponent.showDialog(
+            AppLocalizations.of(context).common_nothing_to_pay, context,
             gravity: Toast.CENTER, duration: Toast.LENGTH_LONG);
         return;
       }
@@ -227,7 +232,8 @@ class _CheckoutState extends State<Checkout> {
       ;
     } else if (_selected_payment_method == "razorpay") {
       if (_grandTotalValue == 0.00) {
-        ToastComponent.showDialog(AppLocalizations.of(context).common_nothing_to_pay, context,
+        ToastComponent.showDialog(
+            AppLocalizations.of(context).common_nothing_to_pay, context,
             gravity: Toast.CENTER, duration: Toast.LENGTH_LONG);
         return;
       }
@@ -243,7 +249,8 @@ class _CheckoutState extends State<Checkout> {
       });
     } else if (_selected_payment_method == "paystack") {
       if (_grandTotalValue == 0.00) {
-        ToastComponent.showDialog(AppLocalizations.of(context).common_nothing_to_pay, context,
+        ToastComponent.showDialog(
+            AppLocalizations.of(context).common_nothing_to_pay, context,
             gravity: Toast.CENTER, duration: Toast.LENGTH_LONG);
         return;
       }
@@ -259,7 +266,8 @@ class _CheckoutState extends State<Checkout> {
       });
     } else if (_selected_payment_method == "iyzico") {
       if (_grandTotalValue == 0.00) {
-        ToastComponent.showDialog(AppLocalizations.of(context).common_nothing_to_pay, context,
+        ToastComponent.showDialog(
+            AppLocalizations.of(context).common_nothing_to_pay, context,
             gravity: Toast.CENTER, duration: Toast.LENGTH_LONG);
         return;
       }
@@ -275,7 +283,8 @@ class _CheckoutState extends State<Checkout> {
       });
     } else if (_selected_payment_method == "bkash") {
       if (_grandTotalValue == 0.00) {
-        ToastComponent.showDialog(AppLocalizations.of(context).common_nothing_to_pay, context,
+        ToastComponent.showDialog(
+            AppLocalizations.of(context).common_nothing_to_pay, context,
             gravity: Toast.CENTER, duration: Toast.LENGTH_LONG);
         return;
       }
@@ -291,7 +300,8 @@ class _CheckoutState extends State<Checkout> {
       });
     } else if (_selected_payment_method == "nagad") {
       if (_grandTotalValue == 0.00) {
-        ToastComponent.showDialog(AppLocalizations.of(context).common_nothing_to_pay, context,
+        ToastComponent.showDialog(
+            AppLocalizations.of(context).common_nothing_to_pay, context,
             gravity: Toast.CENTER, duration: Toast.LENGTH_LONG);
         return;
       }
@@ -307,7 +317,8 @@ class _CheckoutState extends State<Checkout> {
       });
     } else if (_selected_payment_method == "sslcommerz_payment") {
       if (_grandTotalValue == 0.00) {
-        ToastComponent.showDialog(AppLocalizations.of(context).common_nothing_to_pay, context,
+        ToastComponent.showDialog(
+            AppLocalizations.of(context).common_nothing_to_pay, context,
             gravity: Toast.CENTER, duration: Toast.LENGTH_LONG);
         return;
       }
@@ -323,7 +334,8 @@ class _CheckoutState extends State<Checkout> {
       });
     } else if (_selected_payment_method == "flutterwave") {
       if (_grandTotalValue == 0.00) {
-        ToastComponent.showDialog(AppLocalizations.of(context).common_nothing_to_pay, context,
+        ToastComponent.showDialog(
+            AppLocalizations.of(context).common_nothing_to_pay, context,
             gravity: Toast.CENTER, duration: Toast.LENGTH_LONG);
         return;
       }
@@ -337,9 +349,10 @@ class _CheckoutState extends State<Checkout> {
       })).then((value) {
         onPopped(value);
       });
-    }else if (_selected_payment_method == "paytm") {
+    } else if (_selected_payment_method == "paytm") {
       if (_grandTotalValue == 0.00) {
-        ToastComponent.showDialog(AppLocalizations.of(context).common_nothing_to_pay, context,
+        ToastComponent.showDialog(
+            AppLocalizations.of(context).common_nothing_to_pay, context,
             gravity: Toast.CENTER, duration: Toast.LENGTH_LONG);
         return;
       }
@@ -457,7 +470,8 @@ class _CheckoutState extends State<Checkout> {
                               Container(
                                 width: 120,
                                 child: Text(
-                                  AppLocalizations.of(context).checkout_screen_subtotal,
+                                  AppLocalizations.of(context)
+                                      .checkout_screen_subtotal,
                                   textAlign: TextAlign.end,
                                   style: TextStyle(
                                       color: MyTheme.font_grey,
@@ -482,7 +496,8 @@ class _CheckoutState extends State<Checkout> {
                               Container(
                                 width: 120,
                                 child: Text(
-                                  AppLocalizations.of(context).checkout_screen_shipping_cost,
+                                  AppLocalizations.of(context)
+                                      .checkout_screen_shipping_cost,
                                   textAlign: TextAlign.end,
                                   style: TextStyle(
                                       color: MyTheme.font_grey,
@@ -507,7 +522,8 @@ class _CheckoutState extends State<Checkout> {
                               Container(
                                 width: 120,
                                 child: Text(
-                                  AppLocalizations.of(context).checkout_screen_shipping_cost,
+                                  AppLocalizations.of(context)
+                                      .checkout_screen_shipping_cost,
                                   textAlign: TextAlign.end,
                                   style: TextStyle(
                                       color: MyTheme.font_grey,
@@ -532,7 +548,8 @@ class _CheckoutState extends State<Checkout> {
                               Container(
                                 width: 120,
                                 child: Text(
-                                  AppLocalizations.of(context).checkout_screen_discount,
+                                  AppLocalizations.of(context)
+                                      .checkout_screen_discount,
                                   textAlign: TextAlign.end,
                                   style: TextStyle(
                                       color: MyTheme.font_grey,
@@ -558,7 +575,8 @@ class _CheckoutState extends State<Checkout> {
                               Container(
                                 width: 120,
                                 child: Text(
-                                  AppLocalizations.of(context).checkout_screen_grand_total,
+                                  AppLocalizations.of(context)
+                                      .checkout_screen_grand_total,
                                   textAlign: TextAlign.end,
                                   style: TextStyle(
                                       color: MyTheme.font_grey,
@@ -662,7 +680,8 @@ class _CheckoutState extends State<Checkout> {
                                 Padding(
                                   padding: const EdgeInsets.only(left: 16.0),
                                   child: Text(
-                                    AppLocalizations.of(context).checkout_screen_total_amount,
+                                    AppLocalizations.of(context)
+                                        .checkout_screen_total_amount,
                                     style: TextStyle(
                                         color: MyTheme.font_grey, fontSize: 14),
                                   ),
@@ -674,7 +693,8 @@ class _CheckoutState extends State<Checkout> {
                                       onPressDetails();
                                     },
                                     child: Text(
-                                      AppLocalizations.of(context).common_see_details,
+                                      AppLocalizations.of(context)
+                                          .common_see_details,
                                       style: TextStyle(
                                         color: MyTheme.font_grey,
                                         fontSize: 12,
@@ -717,7 +737,8 @@ class _CheckoutState extends State<Checkout> {
             readOnly: _coupon_applied,
             autofocus: false,
             decoration: InputDecoration(
-                hintText: AppLocalizations.of(context).checkout_screen_enter_coupon_code,
+                hintText: AppLocalizations.of(context)
+                    .checkout_screen_enter_coupon_code,
                 hintStyle:
                     TextStyle(fontSize: 14.0, color: MyTheme.textfield_grey),
                 enabledBorder: OutlineInputBorder(
@@ -794,7 +815,7 @@ class _CheckoutState extends State<Checkout> {
 
   AppBar buildAppBar(BuildContext context) {
     return AppBar(
-backgroundColor: Colors.white,
+      backgroundColor: Colors.white,
       centerTitle: true,
       leading: Builder(
         builder: (context) => IconButton(
@@ -836,7 +857,7 @@ backgroundColor: Colors.white,
           height: 100,
           child: Center(
               child: Text(
-                AppLocalizations.of(context).common_no_payment_method_added,
+            AppLocalizations.of(context).common_no_payment_method_added,
             style: TextStyle(color: MyTheme.font_grey),
           )));
     }
@@ -866,12 +887,7 @@ backgroundColor: Colors.white,
                       height: 100,
                       child: Padding(
                           padding: const EdgeInsets.all(16.0),
-                          child:
-                              /*Image.asset(
-                          _paymentTypeList[index].image,
-                          fit: BoxFit.fitWidth,
-                        ),*/
-                              FadeInImage.assetNetwork(
+                          child: FadeInImage.assetNetwork(
                             placeholder: 'assets/placeholder.png',
                             image: _paymentTypeList[index].payment_type ==
                                     "manual_payment"
@@ -879,6 +895,10 @@ backgroundColor: Colors.white,
                                     _paymentTypeList[index].image
                                 : _paymentTypeList[index].image,
                             fit: BoxFit.fitWidth,
+                            imageErrorBuilder: (context, object, stackTrace) {
+                              return Image.network('$emptyImage',
+                                  fit: BoxFit.cover);
+                            },
                           ))),
                   Container(
                     width: 150,
@@ -949,7 +969,8 @@ backgroundColor: Colors.white,
               child: Text(
                 widget.manual_payment_from_order_details
                     ? AppLocalizations.of(context).common_proceed_in_all_caps
-                    : AppLocalizations.of(context).checkout_screen_place_my_order,
+                    : AppLocalizations.of(context)
+                        .checkout_screen_place_my_order,
                 style: TextStyle(
                     color: Colors.white,
                     fontSize: 16,

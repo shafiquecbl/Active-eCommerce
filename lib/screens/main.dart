@@ -1,3 +1,4 @@
+import 'package:active_ecommerce_flutter/Widgets/alertDialog.dart';
 import 'package:active_ecommerce_flutter/my_theme.dart';
 import 'package:active_ecommerce_flutter/screens/category_list.dart';
 import 'package:active_ecommerce_flutter/screens/home.dart';
@@ -10,7 +11,6 @@ import 'package:flutter/services.dart';
 import 'package:active_ecommerce_flutter/helpers/shared_value_helper.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'messenger_list.dart';
-import 'package:rflutter_alert/rflutter_alert.dart';
 
 class Main extends StatefulWidget {
   Main({Key key, go_back = true}) : super(key: key);
@@ -39,6 +39,13 @@ class _MainState extends State<Main> {
     });
   }
 
+  changeIndex() {
+    setState(() {
+      _currentIndex = 0;
+    });
+    return false;
+  }
+
   void initState() {
     //re appear statusbar in case it was not there in the previous page
     SystemChrome.setEnabledSystemUIOverlays(
@@ -50,7 +57,7 @@ class _MainState extends State<Main> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        return widget.go_back;
+        return _currentIndex == 0 ? confirmExitApp(context) : changeIndex();
       },
       child: Directionality(
         textDirection:

@@ -1,4 +1,5 @@
 import 'package:active_ecommerce_flutter/other_config.dart';
+import 'package:active_ecommerce_flutter/screens/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -119,8 +120,8 @@ class _MyAppState extends State<MyApp> {
             ],
             locale: provider.locale,
             supportedLocales: LangConfig().supportedLocales(),
-            home: Splash(),
-            //home: Main(),
+            // home: Splash(),
+            home: Main(),
           );
         }));
   }

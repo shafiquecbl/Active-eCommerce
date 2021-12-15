@@ -1263,8 +1263,8 @@ class _ProductDetailsState extends State<ProductDetails> {
                   child: FadeInImage.assetNetwork(
                     placeholder: 'assets/placeholder.png',
                     image: AppConfig.BASE_PATH + _productDetails.shop_logo,
-                    imageErrorBuilder: (context, object, stactTrace) {
-                      return Icon(Icons.image_not_supported_outlined);
+                    imageErrorBuilder: (context, object, stackTrace) {
+                      return Image.network('$emptyImage', fit: BoxFit.cover);
                     },
                     fit: BoxFit.cover,
                   ),
@@ -1948,6 +1948,10 @@ class _ProductDetailsState extends State<ProductDetails> {
                         placeholder: 'assets/placeholder.png',
                         image: AppConfig.BASE_PATH + _productDetails.brand.logo,
                         fit: BoxFit.contain,
+                        imageErrorBuilder: (context, object, stackTrace) {
+                          return Image.network('$emptyImage',
+                              fit: BoxFit.cover);
+                        },
                       )),
                 ),
               ],
@@ -2290,6 +2294,9 @@ class _ProductDetailsState extends State<ProductDetails> {
                 placeholder: 'assets/placeholder_rectangle.png',
                 image: AppConfig.BASE_PATH + _productImageList[_currentImage],
                 fit: BoxFit.scaleDown,
+                imageErrorBuilder: (context, object, stackTrace) {
+                  return Image.network('$emptyImage', fit: BoxFit.cover);
+                },
               )),
             ),
           ),
