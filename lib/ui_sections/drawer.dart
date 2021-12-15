@@ -13,7 +13,6 @@ import 'package:active_ecommerce_flutter/app_config.dart';
 import 'package:active_ecommerce_flutter/helpers/auth_helper.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-
 class MainDrawer extends StatefulWidget {
   const MainDrawer({
     Key key,
@@ -38,15 +37,16 @@ class _MainDrawerState extends State<MainDrawer> {
          }
          */
 
-        Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (_)=> Login()), (route) => false);
-  
+    Navigator.pushAndRemoveUntil(
+        context, MaterialPageRoute(builder: (_) => Login()), (route) => false);
   }
 
   @override
   Widget build(BuildContext context) {
     return Drawer(
       child: Directionality(
-        textDirection: app_language_rtl.$ ? TextDirection.rtl : TextDirection.ltr,
+        textDirection:
+            app_language_rtl.$ ? TextDirection.rtl : TextDirection.ltr,
         child: Container(
           padding: EdgeInsets.only(top: 50),
           child: SingleChildScrollView(
@@ -55,23 +55,26 @@ class _MainDrawerState extends State<MainDrawer> {
                 is_logged_in.$ == true
                     ? ListTile(
                         leading: CircleAvatar(
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(50),
+                            child: ClipRRect(
+                          borderRadius: BorderRadius.circular(50),
                           child: FadeInImage.assetNetwork(
-                            placeholder: 'assets/placeholder.png', 
-                            image: AppConfig.BASE_PATH + "${avatar_original.$}",
+                            placeholder: 'assets/placeholder.png',
+                            image: avatar_original.$.toString().isNotEmpty
+                                ? AppConfig.BASE_PATH + "${avatar_original.$}"
+                                : emptyUser,
                             fit: BoxFit.cover,
-                          imageErrorBuilder: (context,object,stackTrace){
-                          return Image.network('$emptyUser',fit:BoxFit.cover);
-
-                        },),)
-                        ),
+                            imageErrorBuilder: (context, object, stackTrace) {
+                              return Image.network('$emptyUser',
+                                  fit: BoxFit.cover);
+                            },
+                          ),
+                        )),
                         title: Text("${user_name.$}"),
-                        subtitle:
-                            user_name.$ != "" && user_name.$ != null
-                                ? Text("${user_name.$}")
-                                : Text("${user_phone.$}"))
-                    : Text(AppLocalizations.of(context).main_drawer_not_logged_in,
+                        subtitle: user_name.$ != "" && user_name.$ != null
+                            ? Text("${user_name.$}")
+                            : Text("${user_phone.$}"))
+                    : Text(
+                        AppLocalizations.of(context).main_drawer_not_logged_in,
                         style: TextStyle(
                             color: Color.fromRGBO(153, 153, 153, 1),
                             fontSize: 14)),
@@ -80,15 +83,17 @@ class _MainDrawerState extends State<MainDrawer> {
                     visualDensity: VisualDensity(horizontal: -4, vertical: -4),
                     leading: Image.asset("assets/language.png",
                         height: 16, color: Color.fromRGBO(153, 153, 153, 1)),
-                    title: Text(AppLocalizations.of(context).main_drawer_change_language,
+                    title: Text(
+                        AppLocalizations.of(context)
+                            .main_drawer_change_language,
                         style: TextStyle(
                             color: Color.fromRGBO(153, 153, 153, 1),
                             fontSize: 14)),
                     onTap: () {
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) {
-                            return ChangeLanguage();
-                          }));
+                        return ChangeLanguage();
+                      }));
                     }),
                 ListTile(
                     visualDensity: VisualDensity(horizontal: -4, vertical: -4),
@@ -109,8 +114,10 @@ class _MainDrawerState extends State<MainDrawer> {
                         visualDensity:
                             VisualDensity(horizontal: -4, vertical: -4),
                         leading: Image.asset("assets/profile.png",
-                            height: 16, color: Color.fromRGBO(153, 153, 153, 1)),
-                        title: Text(AppLocalizations.of(context).main_drawer_profile,
+                            height: 16,
+                            color: Color.fromRGBO(153, 153, 153, 1)),
+                        title: Text(
+                            AppLocalizations.of(context).main_drawer_profile,
                             style: TextStyle(
                                 color: Color.fromRGBO(153, 153, 153, 1),
                                 fontSize: 14)),
@@ -126,8 +133,10 @@ class _MainDrawerState extends State<MainDrawer> {
                         visualDensity:
                             VisualDensity(horizontal: -4, vertical: -4),
                         leading: Image.asset("assets/order.png",
-                            height: 16, color: Color.fromRGBO(153, 153, 153, 1)),
-                        title: Text(AppLocalizations.of(context).main_drawer_orders,
+                            height: 16,
+                            color: Color.fromRGBO(153, 153, 153, 1)),
+                        title: Text(
+                            AppLocalizations.of(context).main_drawer_orders,
                             style: TextStyle(
                                 color: Color.fromRGBO(153, 153, 153, 1),
                                 fontSize: 14)),
@@ -143,8 +152,11 @@ class _MainDrawerState extends State<MainDrawer> {
                         visualDensity:
                             VisualDensity(horizontal: -4, vertical: -4),
                         leading: Image.asset("assets/heart.png",
-                            height: 16, color: Color.fromRGBO(153, 153, 153, 1)),
-                        title: Text(AppLocalizations.of(context).main_drawer_my_wishlist,
+                            height: 16,
+                            color: Color.fromRGBO(153, 153, 153, 1)),
+                        title: Text(
+                            AppLocalizations.of(context)
+                                .main_drawer_my_wishlist,
                             style: TextStyle(
                                 color: Color.fromRGBO(153, 153, 153, 1),
                                 fontSize: 14)),
@@ -160,8 +172,11 @@ class _MainDrawerState extends State<MainDrawer> {
                         visualDensity:
                             VisualDensity(horizontal: -4, vertical: -4),
                         leading: Image.asset("assets/cart.png",
-                            height: 16, color: Color.fromRGBO(153, 153, 153, 1)),
-                        title: Text(AppLocalizations.of(context).main_screen_bottom_navigation_cart,
+                            height: 16,
+                            color: Color.fromRGBO(153, 153, 153, 1)),
+                        title: Text(
+                            AppLocalizations.of(context)
+                                .main_screen_bottom_navigation_cart,
                             style: TextStyle(
                                 color: Color.fromRGBO(153, 153, 153, 1),
                                 fontSize: 14)),
@@ -177,8 +192,10 @@ class _MainDrawerState extends State<MainDrawer> {
                         visualDensity:
                             VisualDensity(horizontal: -4, vertical: -4),
                         leading: Image.asset("assets/wallet.png",
-                            height: 16, color: Color.fromRGBO(153, 153, 153, 1)),
-                        title: Text(AppLocalizations.of(context).main_drawer_wallet,
+                            height: 16,
+                            color: Color.fromRGBO(153, 153, 153, 1)),
+                        title: Text(
+                            AppLocalizations.of(context).main_drawer_wallet,
                             style: TextStyle(
                                 color: Color.fromRGBO(153, 153, 153, 1),
                                 fontSize: 14)),
@@ -195,8 +212,10 @@ class _MainDrawerState extends State<MainDrawer> {
                         visualDensity:
                             VisualDensity(horizontal: -4, vertical: -4),
                         leading: Image.asset("assets/login.png",
-                            height: 16, color: Color.fromRGBO(153, 153, 153, 1)),
-                        title: Text(AppLocalizations.of(context).main_drawer_login,
+                            height: 16,
+                            color: Color.fromRGBO(153, 153, 153, 1)),
+                        title: Text(
+                            AppLocalizations.of(context).main_drawer_login,
                             style: TextStyle(
                                 color: Color.fromRGBO(153, 153, 153, 1),
                                 fontSize: 14)),
@@ -212,8 +231,10 @@ class _MainDrawerState extends State<MainDrawer> {
                         visualDensity:
                             VisualDensity(horizontal: -4, vertical: -4),
                         leading: Image.asset("assets/logout.png",
-                            height: 16, color: Color.fromRGBO(153, 153, 153, 1)),
-                        title: Text(AppLocalizations.of(context).main_drawer_logout,
+                            height: 16,
+                            color: Color.fromRGBO(153, 153, 153, 1)),
+                        title: Text(
+                            AppLocalizations.of(context).main_drawer_logout,
                             style: TextStyle(
                                 color: Color.fromRGBO(153, 153, 153, 1),
                                 fontSize: 14)),

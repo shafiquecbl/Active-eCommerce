@@ -198,8 +198,12 @@ class _FlashDealListState extends State<FlashDealList> {
                           borderRadius: BorderRadius.circular(16.0),
                           child: FadeInImage.assetNetwork(
                             placeholder: 'assets/placeholder_rectangle.png',
-                            image: AppConfig.BASE_PATH +
-                                flashDealResponse.flash_deals[index].banner,
+                            image: flashDealResponse.flash_deals[index].banner
+                                    .toString()
+                                    .isNotEmpty
+                                ? AppConfig.BASE_PATH +
+                                    flashDealResponse.flash_deals[index].banner
+                                : emptyImage,
                             fit: BoxFit.cover,
                             imageErrorBuilder: (context, object, stackTrace) {
                               return Image.network('$emptyImage',

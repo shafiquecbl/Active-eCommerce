@@ -454,8 +454,13 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                                   bottom: Radius.zero),
                               child: FadeInImage.assetNetwork(
                                 placeholder: 'assets/placeholder.png',
-                                image: AppConfig.BASE_PATH +
-                                    _featuredCategoryList[index].banner,
+                                image: _featuredCategoryList[index]
+                                        .banner
+                                        .toString()
+                                        .isNotEmpty
+                                    ? AppConfig.BASE_PATH +
+                                        _featuredCategoryList[index].banner
+                                    : emptyImage,
                                 fit: BoxFit.cover,
                                 imageErrorBuilder:
                                     (context, object, stackTrace) {
@@ -728,7 +733,9 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                           borderRadius: BorderRadius.all(Radius.circular(8)),
                           child: FadeInImage.assetNetwork(
                             placeholder: 'assets/placeholder_rectangle.png',
-                            image: AppConfig.BASE_PATH + i,
+                            image: i.toString().isNotEmpty
+                                ? AppConfig.BASE_PATH + i
+                                : emptyImage,
                             fit: BoxFit.fill,
                             imageErrorBuilder: (context, object, stackTrace) {
                               return Image.network('$emptyImage',

@@ -306,7 +306,9 @@ class _SellerDetailsState extends State<SellerDetails> {
                           borderRadius: BorderRadius.all(Radius.circular(8)),
                           child: FadeInImage.assetNetwork(
                             placeholder: 'assets/placeholder_rectangle.png',
-                            image: AppConfig.BASE_PATH + i,
+                            image: i.toString().isNotEmpty
+                                ? AppConfig.BASE_PATH + i
+                                : emptyImage,
                             fit: BoxFit.fill,
                             imageErrorBuilder: (context, object, stackTrace) {
                               return Image.network('$emptyImage',
@@ -598,7 +600,9 @@ class _SellerDetailsState extends State<SellerDetails> {
             borderRadius: BorderRadius.circular(5),
             child: FadeInImage.assetNetwork(
               placeholder: 'assets/placeholder.png',
-              image: AppConfig.BASE_PATH + _shopDetails.logo,
+              image: _shopDetails.logo.toString().isNotEmpty
+                  ? AppConfig.BASE_PATH + _shopDetails.logo
+                  : emptyImage,
               fit: BoxFit.cover,
               imageErrorBuilder: (context, object, stackTrace) {
                 return Image.network('$emptyImage', fit: BoxFit.cover);

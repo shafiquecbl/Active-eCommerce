@@ -581,10 +581,16 @@ class _CartState extends State<Cart> {
                 padding: const EdgeInsets.all(16.0),
                 child: FadeInImage.assetNetwork(
                   placeholder: 'assets/placeholder.png',
-                  image: AppConfig.BASE_PATH +
-                      _shopList[seller_index]
+                  image: _shopList[seller_index]
                           .cart_items[item_index]
-                          .product_thumbnail_image,
+                          .product_thumbnail_image
+                          .toString()
+                          .isNotEmpty
+                      ? AppConfig.BASE_PATH +
+                          _shopList[seller_index]
+                              .cart_items[item_index]
+                              .product_thumbnail_image
+                      : emptyImage,
                   fit: BoxFit.fitWidth,
                   imageErrorBuilder: (context, object, stackTrace) {
                     return Image.network('$emptyImage', fit: BoxFit.cover);

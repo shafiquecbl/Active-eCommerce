@@ -181,8 +181,16 @@ class _WishlistState extends State<Wishlist> {
                                 left: Radius.circular(16), right: Radius.zero),
                             child: FadeInImage.assetNetwork(
                               placeholder: 'assets/placeholder.png',
-                              image: AppConfig.BASE_PATH +
-                                  _wishlistItems[index].product.thumbnail_image,
+                              image: _wishlistItems[index]
+                                      .product
+                                      .thumbnail_image
+                                      .toString()
+                                      .isNotEmpty
+                                  ? AppConfig.BASE_PATH +
+                                      _wishlistItems[index]
+                                          .product
+                                          .thumbnail_image
+                                  : emptyImage,
                               fit: BoxFit.cover,
                               imageErrorBuilder: (context, object, stackTrace) {
                                 return Image.network('$emptyImage',

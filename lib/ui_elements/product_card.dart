@@ -59,7 +59,9 @@ class _ProductCardState extends State<ProductCard> {
                           top: Radius.circular(16), bottom: Radius.zero),
                       child: FadeInImage.assetNetwork(
                         placeholder: 'assets/placeholder.png',
-                        image: AppConfig.BASE_PATH + widget.image,
+                        image: widget.image.toString().isNotEmpty
+                            ? AppConfig.BASE_PATH + widget.image
+                            : emptyImage,
                         fit: BoxFit.cover,
                         imageErrorBuilder: (context, object, stackTrace) {
                           return Image.network('$emptyImage',

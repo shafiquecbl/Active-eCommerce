@@ -1262,7 +1262,9 @@ class _ProductDetailsState extends State<ProductDetails> {
                   ),
                   child: FadeInImage.assetNetwork(
                     placeholder: 'assets/placeholder.png',
-                    image: AppConfig.BASE_PATH + _productDetails.shop_logo,
+                    image: _productDetails.shop_logo.toString().isNotEmpty
+                        ? AppConfig.BASE_PATH + _productDetails.shop_logo
+                        : emptyImage,
                     imageErrorBuilder: (context, object, stackTrace) {
                       return Image.network('$emptyImage', fit: BoxFit.cover);
                     },
@@ -1946,7 +1948,9 @@ class _ProductDetailsState extends State<ProductDetails> {
                       borderRadius: BorderRadius.circular(5),
                       child: FadeInImage.assetNetwork(
                         placeholder: 'assets/placeholder.png',
-                        image: AppConfig.BASE_PATH + _productDetails.brand.logo,
+                        image: _productDetails.brand.logo.toString().isNotEmpty
+                            ? AppConfig.BASE_PATH + _productDetails.brand.logo
+                            : emptyImage,
                         fit: BoxFit.contain,
                         imageErrorBuilder: (context, object, stackTrace) {
                           return Image.network('$emptyImage',
@@ -2292,7 +2296,9 @@ class _ProductDetailsState extends State<ProductDetails> {
               child: Container(
                   child: FadeInImage.assetNetwork(
                 placeholder: 'assets/placeholder_rectangle.png',
-                image: AppConfig.BASE_PATH + _productImageList[_currentImage],
+                image: _productImageList[_currentImage].toString().isNotEmpty
+                    ? AppConfig.BASE_PATH + _productImageList[_currentImage]
+                    : emptyImage,
                 fit: BoxFit.scaleDown,
                 imageErrorBuilder: (context, object, stackTrace) {
                   return Image.network('$emptyImage', fit: BoxFit.cover);

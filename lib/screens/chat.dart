@@ -13,7 +13,6 @@ import 'package:active_ecommerce_flutter/helpers/shimmer_helper.dart';
 import 'package:active_ecommerce_flutter/helpers/shared_value_helper.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-
 class Chat extends StatefulWidget {
   Chat({
     Key key,
@@ -54,7 +53,6 @@ class _ChatState extends State<Chat> {
 
     fetchData();
   }
-
 
   fetchData() async {
     var messageResponse = await ChatRepository().getMessageResponse(
@@ -144,14 +142,13 @@ class _ChatState extends State<Chat> {
     setState(() {});
 
     // if new message comes in
-    if( messageResponse.messages.length > 0){
+    if (messageResponse.messages.length > 0) {
       _xcrollController.animateTo(
         _xcrollController.position.maxScrollExtent + 100,
         curve: Curves.easeOut,
         duration: const Duration(milliseconds: 500),
       );
     }
-
   }
 
   @override
@@ -178,7 +175,8 @@ class _ChatState extends State<Chat> {
                           borderRadius: BorderRadius.circular(0.0),
                         ),
                         child: Text(
-                          AppLocalizations.of(context).home_screen_featured_categories,
+                          AppLocalizations.of(context)
+                              .home_screen_featured_categories,
                           style: TextStyle(
                               color: Colors.white,
                               fontSize: 16,
@@ -199,7 +197,8 @@ class _ChatState extends State<Chat> {
                   )
                 ],
               ),
-              Align(alignment: Alignment.center, child: buildLoadingContainer()),
+              Align(
+                  alignment: Alignment.center, child: buildLoadingContainer()),
               //original
               Align(
                 alignment: Alignment.bottomCenter,
@@ -240,7 +239,7 @@ class _ChatState extends State<Chat> {
 
   AppBar buildAppBar(BuildContext context) {
     return AppBar(
-backgroundColor: Colors.white,
+      backgroundColor: Colors.white,
       toolbarHeight: 75,
       leading: Builder(
         builder: (context) => IconButton(
@@ -269,9 +268,11 @@ backgroundColor: Colors.white,
                         borderRadius: BorderRadius.circular(35),
                         child: FadeInImage.assetNetwork(
                           placeholder: 'assets/placeholder.png',
-                          image: AppConfig.BASE_PATH + widget.messenger_image,
+                          image: widget.messenger_image.toString().isNotEmpty
+                              ? AppConfig.BASE_PATH + widget.messenger_image
+                              : emptyUser,
                           fit: BoxFit.contain,
-                          imageErrorBuilder: (context,object,stackTrace){
+                          imageErrorBuilder: (context, object, stackTrace) {
                             return Image.network('$emptyUser');
                           },
                         )),
@@ -353,7 +354,8 @@ backgroundColor: Colors.white,
         ),
       );
     } else if (_totalData == 0) {
-      return Center(child: Text(AppLocalizations.of(context).common_no_data_available));
+      return Center(
+          child: Text(AppLocalizations.of(context).common_no_data_available));
     } else {
       return Container(); // should never be happening
     }
@@ -385,7 +387,8 @@ backgroundColor: Colors.white,
             decoration: InputDecoration(
                 filled: true,
                 fillColor: Color.fromRGBO(251, 251, 251, 1),
-                hintText: AppLocalizations.of(context).chat_screen_type_message_here,
+                hintText:
+                    AppLocalizations.of(context).chat_screen_type_message_here,
                 hintStyle:
                     TextStyle(fontSize: 14.0, color: MyTheme.textfield_grey),
                 enabledBorder: OutlineInputBorder(

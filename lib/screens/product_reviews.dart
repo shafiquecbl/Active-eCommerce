@@ -273,7 +273,9 @@ class _ProductReviewsState extends State<ProductReviews> {
                 borderRadius: BorderRadius.circular(35),
                 child: FadeInImage.assetNetwork(
                   placeholder: 'assets/placeholder.png',
-                  image: AppConfig.BASE_PATH + _reviewList[index].avatar,
+                  image: _reviewList[index].avatar.toString().isNotEmpty
+                      ? AppConfig.BASE_PATH + _reviewList[index].avatar
+                      : emptyImage,
                   fit: BoxFit.cover,
                   imageErrorBuilder: (context, object, stackTrace) {
                     return Image.network('$emptyImage', fit: BoxFit.cover);

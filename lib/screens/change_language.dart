@@ -224,7 +224,9 @@ class _ChangeLanguageState extends State<ChangeLanguage> {
                           padding: const EdgeInsets.all(16.0),
                           child: FadeInImage.assetNetwork(
                             placeholder: 'assets/placeholder.png',
-                            image: _list[index].image,
+                            image: _list[index].image.toString().isNotEmpty
+                                ? _list[index].image
+                                : emptyImage,
                             fit: BoxFit.fitWidth,
                             imageErrorBuilder: (context, object, stackTrace) {
                               return Image.network('$emptyImage',

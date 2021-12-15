@@ -4,11 +4,11 @@ import 'package:active_ecommerce_flutter/app_config.dart';
 import 'package:active_ecommerce_flutter/screens/seller_details.dart';
 
 class ShopSquareCard extends StatefulWidget {
- final int id;
- final String image;
- final String name;
+  final int id;
+  final String image;
+  final String name;
 
-  ShopSquareCard({Key key,this.id, this.image, this.name}) : super(key: key);
+  ShopSquareCard({Key key, this.id, this.image, this.name}) : super(key: key);
 
   @override
   _ShopSquareCardState createState() => _ShopSquareCardState();
@@ -18,9 +18,11 @@ class _ShopSquareCardState extends State<ShopSquareCard> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: (){
+      onTap: () {
         Navigator.push(context, MaterialPageRoute(builder: (context) {
-          return SellerDetails(id: widget.id,);
+          return SellerDetails(
+            id: widget.id,
+          );
         }));
       },
       child: Card(
@@ -36,17 +38,19 @@ class _ShopSquareCardState extends State<ShopSquareCard> {
             children: <Widget>[
               Container(
                   width: double.infinity,
-                  height: ((MediaQuery.of(context).size.width - 24) /2) * .72,
+                  height: ((MediaQuery.of(context).size.width - 24) / 2) * .72,
                   child: ClipRRect(
                       borderRadius: BorderRadius.vertical(
                           top: Radius.circular(16), bottom: Radius.zero),
                       child: FadeInImage.assetNetwork(
                         placeholder: 'assets/placeholder.png',
-                        image: AppConfig.BASE_PATH + widget.image,
+                        image: widget.image.toString().isNotEmpty
+                            ? AppConfig.BASE_PATH + widget.image
+                            : emptyImage,
                         fit: BoxFit.scaleDown,
-                        imageErrorBuilder: (context,object,stackTrace){
-                          return Image.network('$emptyImage',fit:BoxFit.cover);
-
+                        imageErrorBuilder: (context, object, stackTrace) {
+                          return Image.network('$emptyImage',
+                              fit: BoxFit.cover);
                         },
                       ))),
               Container(

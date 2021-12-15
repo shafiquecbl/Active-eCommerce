@@ -218,8 +218,7 @@ class _MessengerListState extends State<MessengerList> {
                 borderRadius: BorderRadius.circular(35),
                 child: FadeInImage.assetNetwork(
                   placeholder: 'assets/placeholder.png',
-                  image: _list[index].shop_logo == '' ||
-                          _list[index].shop_logo == null
+                  image: _list[index].shop_logo.toString().isNotEmpty
                       ? AppConfig.BASE_PATH + _list[index].shop_logo
                       : emptyUser,
                   fit: BoxFit.contain,

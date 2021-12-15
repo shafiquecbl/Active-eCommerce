@@ -379,7 +379,12 @@ class _RechargeWalletState extends State<RechargeWallet> {
                         ),*/
                               FadeInImage.assetNetwork(
                             placeholder: 'assets/placeholder.png',
-                            image: _paymentTypeList[index].image,
+                            image: _paymentTypeList[index]
+                                    .image
+                                    .toString()
+                                    .isNotEmpty
+                                ? _paymentTypeList[index].image
+                                : emptyImage,
                             fit: BoxFit.fitWidth,
                             imageErrorBuilder: (context, object, stackTrace) {
                               return Image.network('$emptyImage',
