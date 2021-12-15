@@ -1,4 +1,5 @@
 import 'package:active_ecommerce_flutter/app_config.dart';
+import 'package:active_ecommerce_flutter/data_model/login_response.dart';
 import 'package:active_ecommerce_flutter/my_theme.dart';
 import 'package:active_ecommerce_flutter/other_config.dart';
 import 'package:active_ecommerce_flutter/social_config.dart';
@@ -72,7 +73,7 @@ class _LoginState extends State<Login> {
       return;
     }
 
-    var loginResponse = await AuthRepository()
+    LoginResponse loginResponse = await AuthRepository()
         .getLoginResponse(_login_by == 'email' ? email : _phone, password);
 
     if (loginResponse.result == false) {

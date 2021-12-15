@@ -7,7 +7,6 @@ import 'package:active_ecommerce_flutter/screens/profile.dart';
 import 'package:active_ecommerce_flutter/screens/filter.dart';
 import 'package:flutter/material.dart';
 import 'dart:ui';
-import 'package:flutter/services.dart';
 import 'package:active_ecommerce_flutter/helpers/shared_value_helper.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'messenger_list.dart';
@@ -29,14 +28,23 @@ class _MainState extends State<Main> {
       is_base_category: true,
     ),
     Home(),
-    is_logged_in.$ == true ? MessengerList() : Login(),
-    is_logged_in.$ == true ? Profile() : Login()
+    MessengerList(),
+    Profile()
   ];
 
   void onTapped(int i) {
-    setState(() {
-      _currentIndex = i;
-    });
+    if (i == 3 || i == 4) {
+      if (is_logged_in.$ == true) {
+        setState(() {
+          _currentIndex = i;
+        });
+      } else
+        Navigator.push(context, MaterialPageRoute(builder: (_) => Login()));
+    } else {
+      setState(() {
+        _currentIndex = i;
+      });
+    }
   }
 
   changeIndex() {
@@ -47,9 +55,6 @@ class _MainState extends State<Main> {
   }
 
   void initState() {
-    //re appear statusbar in case it was not there in the previous page
-    SystemChrome.setEnabledSystemUIOverlays(
-        [SystemUiOverlay.top, SystemUiOverlay.bottom]);
     super.initState();
   }
 

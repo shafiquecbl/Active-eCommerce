@@ -1,10 +1,10 @@
 import 'package:active_ecommerce_flutter/other_config.dart';
 import 'package:active_ecommerce_flutter/screens/main.dart';
+import 'package:active_ecommerce_flutter/screens/splash.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:active_ecommerce_flutter/my_theme.dart';
-import 'package:active_ecommerce_flutter/screens/splash.dart';
 import 'package:shared_value/shared_value.dart';
 import 'package:active_ecommerce_flutter/helpers/shared_value_helper.dart';
 import 'dart:async';
@@ -25,31 +25,41 @@ main() async {
     DeviceOrientation.portraitDown,
   ]);
 
-  fetch_user() async {
-    var userByTokenResponse = await AuthRepository().getUserByTokenResponse();
+  fetchUser() async {
+    await AuthRepository().getUserByTokenResponse().then((userByTokenResponse) {
+      if (userByTokenResponse.result == true) {
+        is_logged_in.$ = true;
+        is_logged_in.save();
 
-    if (userByTokenResponse.result == true) {
-      is_logged_in.$ = true;
-      is_logged_in.save();
-      user_id.$ = userByTokenResponse.id;
-      user_id.save();
-      user_name.$ = userByTokenResponse.name;
-      user_name.save();
-      user_name.$ = userByTokenResponse.email;
-      user_name.save();
-      user_phone.$ = userByTokenResponse.phone;
-      user_phone.save();
-      avatar_original.$ = userByTokenResponse.avatar_original;
-      avatar_original.save();
-    }
+        //
+        user_id.$ = userByTokenResponse.id;
+        user_id.save();
+
+        //
+        user_name.$ = userByTokenResponse.name;
+        user_name.save();
+
+        //
+        user_email.$ = userByTokenResponse.email;
+        user_email.save();
+
+        //
+        user_phone.$ = userByTokenResponse.phone;
+        user_phone.save();
+
+        //
+        avatar_original.$ = userByTokenResponse.avatar_original;
+        avatar_original.save();
+      }
+    });
   }
 
   app_language.load();
   app_mobile_language.load();
   app_language_rtl.load();
 
-  access_token.load().whenComplete(() {
-    fetch_user();
+  access_token.load().then((e) {
+    fetchUser();
   });
 
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
@@ -99,11 +109,7 @@ class _MyAppState extends State<MyApp> {
               primaryColor: MyTheme.white,
               visualDensity: VisualDensity.adaptivePlatformDensity,
               accentColor: MyTheme.accent_color,
-              /*textTheme: TextTheme(
-              bodyText1: TextStyle(),
-              bodyText2: TextStyle(fontSize: 12.0),
-            )*/
-              //
+
               // the below code is getting fonts from http
               textTheme: GoogleFonts.sourceSansProTextTheme(textTheme).copyWith(
                 bodyText1:

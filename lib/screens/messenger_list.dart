@@ -8,7 +8,6 @@ import 'package:active_ecommerce_flutter/app_config.dart';
 import 'package:active_ecommerce_flutter/helpers/shared_value_helper.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-
 class MessengerList extends StatefulWidget {
   @override
   _MessengerListState createState() => _MessengerListState();
@@ -28,23 +27,25 @@ class _MessengerListState extends State<MessengerList> {
   void initState() {
     super.initState();
 
-    if(is_logged_in.$ == true){
+    if (is_logged_in.$ == true) {
       fetchData();
 
-    _xcrollController.addListener(() {
-      if (_xcrollController.position.pixels ==
-          _xcrollController.position.maxScrollExtent) {
-        setState(() {
-          _page++;
-        });
-        _showLoadingContainer = true;
-        fetchData();
-      }
-    });}
+      _xcrollController.addListener(() {
+        if (_xcrollController.position.pixels ==
+            _xcrollController.position.maxScrollExtent) {
+          setState(() {
+            _page++;
+          });
+          _showLoadingContainer = true;
+          fetchData();
+        }
+      });
+    }
   }
 
   fetchData() async {
-    var conversatonResponse = await ChatRepository().getConversationResponse(page: _page);
+    var conversatonResponse =
+        await ChatRepository().getConversationResponse(page: _page);
     _list.addAll(conversatonResponse.conversation_item_list);
     _isInitial = false;
     _totalData = conversatonResponse.meta.total;
@@ -91,10 +92,15 @@ class _MessengerListState extends State<MessengerList> {
                     delegate: SliverChildListDelegate([
                       Padding(
                         padding: const EdgeInsets.all(16.0),
-                        child: is_logged_in.$ == true ? buildMessengerList() : Padding(
-                          padding: const EdgeInsets.symmetric(vertical:25),
-                          child: Center(child: Text('Please Login to see Messages'),),
-                        ),
+                        child: is_logged_in.$ == true
+                            ? buildMessengerList()
+                            : Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 25),
+                                child: Center(
+                                  child: Text('Please Login to see Messages'),
+                                ),
+                              ),
                       ),
                     ]),
                   )
@@ -102,7 +108,8 @@ class _MessengerListState extends State<MessengerList> {
               ),
             ),
             Align(
-                alignment: Alignment.bottomCenter, child: buildLoadingContainer())
+                alignment: Alignment.bottomCenter,
+                child: buildLoadingContainer())
           ],
         ),
       ),
@@ -124,7 +131,7 @@ class _MessengerListState extends State<MessengerList> {
 
   AppBar buildAppBar(BuildContext context) {
     return AppBar(
-backgroundColor: Colors.white,
+      backgroundColor: Colors.white,
       centerTitle: true,
       leading: GestureDetector(
         onTap: () {
@@ -211,12 +218,17 @@ backgroundColor: Colors.white,
                 borderRadius: BorderRadius.circular(35),
                 child: FadeInImage.assetNetwork(
                   placeholder: 'assets/placeholder.png',
-                  image: AppConfig.BASE_PATH + _list[index].shop_logo,
+                  image: _list[index].shop_logo == '' ||
+                          _list[index].shop_logo == null
+                      ? AppConfig.BASE_PATH + _list[index].shop_logo
+                      : emptyUser,
                   fit: BoxFit.contain,
-                  imageErrorBuilder: (context,object,stackTrace){
-                          return Image.network('$emptyUser',fit: BoxFit.cover,);
-
-                        },
+                  imageErrorBuilder: (context, object, stackTrace) {
+                    return Image.network(
+                      '$emptyUser',
+                      fit: BoxFit.cover,
+                    );
+                  },
                 )),
           ),
           Container(

@@ -1,3 +1,4 @@
+import 'package:active_ecommerce_flutter/data_model/login_response.dart';
 import 'package:shared_value/shared_value.dart';
 
 final SharedValue<bool> is_logged_in = SharedValue(
@@ -48,5 +49,3 @@ final SharedValue<bool> app_language_rtl = SharedValue(
   value: false, // initial value
   key: "app_language_rtl", // disk storage key for shared_preferences
 );
-
-

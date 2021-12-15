@@ -12,7 +12,6 @@ import 'package:flutter/foundation.dart';
 import 'dart:convert';
 import 'package:active_ecommerce_flutter/helpers/shared_value_helper.dart';
 
-
 class AuthRepository {
   Future<LoginResponse> getLoginResponse(
       @required String email, @required String password) async {
@@ -29,6 +28,7 @@ class AuthRepository {
           "App-Language": app_language.$,
         },
         body: post_body);
+    print(response.body);
     return loginResponseFromJson(response.body);
   }
 
